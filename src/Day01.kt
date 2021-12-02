@@ -1,17 +1,23 @@
+fun part1(input: List<String>): Int =
+    input.map { it.toInt() }
+        .zipWithNext()
+        .count { it.first < it.second }
+
+// Alternative: Use .windowed on Collections.
+fun part2(input: List<String>): Int =
+    with(input.map { it.toInt() }) {
+        subList(0, count() - 3)
+            .zip(subList(3, count()))
+            .count { it.first < it.second }
+    }
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
-    }
+    val exampleInput = readInput("Day01_example")
+//    val input = readInput("Day01_actual")
 
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
+    check(part1(exampleInput) == 7)
+//    println(part1(input))
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    check(part2(exampleInput) == 5)
+//    println(part2(input))
 }
